@@ -10,9 +10,6 @@ class Team extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'about',
-        'sport',
     ];
 
     public function members()
@@ -20,19 +17,14 @@ class Team extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function photos()
+    public function profile()
     {
-        return $this->hasMany(Photo::class);
+        return $this->morphOne(Profile::class, 'profileable');
     }
 
-    public function decisionsGiven()
+    public function decisions()
     {
-        return $this->hasMany(Decision::class);
-    }
-
-    public function decisionsRecieved()
-    {
-        return $this->hasMany(Decision::class);
+        return $this->morphMany(Decision::class, 'decisionable');
     }    
     
     public function conversations()

@@ -20,7 +20,7 @@ class DecisionController extends Controller
         $decision->profile()->associate($profile);
         $decision->save();
 
-        if(Decision::where('user_id', $profile->user->id)
+        if(Decision::where('decisionable_id', $profile->profileable->id)
                     ->where('profile_id', $user->profile->id)
                     ->where('choice', $choice)
                     ->whereNot('choice', 'pass')->exists()
@@ -30,7 +30,7 @@ class DecisionController extends Controller
                 'choice' => $choice,
             ]);
             $conversation->participants()->attach($user->id);
-            $conversation->participants()->attach($profile->user->id);
+            $conversation->participants()->attach($profile->profileable->id);
             return redirect()->route('conversation', $conversation->id);
         }
         return redirect('dashboard');

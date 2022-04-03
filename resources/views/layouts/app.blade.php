@@ -9,7 +9,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <!--<link rel="stylesheet" href="{{ asset('css/app.css') }}">-->
     </head>
     <body>
         <nav class="navbar navbar-expand-xs navbar-light bg-light">
@@ -19,6 +19,7 @@
                         <a class="nav-item nav-link" href="{{ route('conversations') }}" class="p-3">Conversations</a>
                         <a class="nav-item nav-link" href="{{ route('dashboard') }}" class="p-3">Dashboard</a>
                         <a class="nav-item nav-link" href="{{ route('profile') }}" class="p-3">Profile</a>
+                        <a class="nav-item nav-link" href="{{ route('teams') }}" class="p-3">Teams</a>
                     @endauth
                 </div>
             </div>

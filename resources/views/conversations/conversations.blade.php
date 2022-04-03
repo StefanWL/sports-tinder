@@ -7,8 +7,10 @@
         </div>
 
         @foreach($conversations as $conversation)
+        @if($conversation->partner->photos->count())
             <img height="50px" src="data:image/jpeg;base64,{{ $conversation->partner->photos->first()->image }}"/>
-            <a href="{{ route('conversation', $conversation) }}">{{ $conversation->partner->user->name }}</a>
+        @endif
+            <a href="{{ route('conversation', $conversation) }}">{{ $conversation->partner->profileable->name }}</a>
             @if($conversation->messages->last() !== null)
                 <div>{{ $conversation->messages->last()->content }}</div>
             @endif

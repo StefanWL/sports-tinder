@@ -15,12 +15,12 @@ class DashboardController extends Controller
         $profile = Profile::whereNotExists(
             function ($query) use($user)
             {
-                $query->select(DB::raw('user_id'))
+                $query->select(DB::raw('decisionable_id'))
                     ->from('decisions')
-                    ->where('decisions.user_id', $user->id)
+                    ->where('decisions.decisionable_id', $user->id)
                     ->whereColumn('profiles.id', 'decisions.profile_id');
             }
-        )->whereNot('profiles.user_id', $user->id)->first();
+        )->whereNot('profiles.profileable_id', $user->id)->first();
 
         return view('dashboard',[
             'profile' => $profile,

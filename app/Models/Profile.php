@@ -10,15 +10,16 @@ class Profile extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'bio',
         'sport1',
         'sport2',
         'sport3',
     ];
 
-    public function user()
+    public function profileable()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
     }
 
     public function photos()

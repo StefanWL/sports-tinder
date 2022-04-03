@@ -35,22 +35,17 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->morphOne(Profile::class, 'profileable');
     }
 
     public function decisions()
     {
-        return $this->hasMany(Decision::class);
-    }   
+        return $this->morphMany(Decision::class, 'decisionable');
+    }    
     
     public function conversations()
     {
         return $this->belongsToMany(Conversation::class);
-    }
-
-    public function events()
-    {
-        return $this->belongsToMany(Event::class);
     }
 
     /**

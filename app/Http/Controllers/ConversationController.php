@@ -20,7 +20,7 @@ class ConversationController extends Controller
             $conversation->partner = $partner;
         }
 
-        return view('conversations', [
+        return view('conversations.conversations', [
             'conversations' => $conversations,
         ]);
     }
@@ -31,7 +31,7 @@ class ConversationController extends Controller
             return $participant->id === $user->id;
         })->first()->profile;
 
-        return view('messages', [
+        return view('conversations.messages', [
             'conversation' => $conversation,
             'partner' => $partner,
         ]);

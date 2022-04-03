@@ -3,8 +3,14 @@
 @section('content')
     <div class="flex justify-center">
         <div class="w-8/12 bg-white p-6 rounded-lg">
+        @if($partner->photos->count())
             <img height="50px" src="data:image/jpeg;base64,{{ $partner->photos->first()->image }}"/>
-            {{ $partner->user->name }}
+        @endif
+            {{ $partner->profileable->name }}
+            <form action="{{ route('teams', $partner->profileable) }}" method="post">
+                @csrf
+                <button type="submit">New Team</button>
+            </form>
         </div>
         @foreach($conversation->messages as $message)
             @if($message->user->id === auth()->user()->id)

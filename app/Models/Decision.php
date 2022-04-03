@@ -13,9 +13,9 @@ class Decision extends Model
         'choice'
     ];
 
-    public function user()
+    public function decisionable()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
     }
 
     public function profile()

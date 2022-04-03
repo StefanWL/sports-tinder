@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -31,3 +32,8 @@ Route::get('/conversations', [ConversationController::class, 'index'])->name('co
 
 Route::get('/conversations/{conversation}', [ConversationController::class, 'detail'])->name('conversation')->middleware('auth');
 Route::post('/conversations/{conversation}', [ConversationController::class, 'create'])->middleware('auth');
+
+Route::get('/teams', [TeamController::class, 'index'])->name('teams')->middleware('auth');
+Route::post('/teams/{user?}', [TeamController::class, 'create'])->middleware('auth');
+Route::get('/team/{team}', [TeamController::class, 'detail'])->name('team')->middleware('auth');
+Route::post('/team/{team}', [TeamController::class, 'edit'])->middleware('auth');

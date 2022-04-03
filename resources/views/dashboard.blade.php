@@ -6,7 +6,7 @@
             Dashboard
         </div>
         @if($profile)
-            <div>{{ $profile->user->name }}</div>
+            <div>{{ $profile->profileable->name }}</div>
             <div>{{ $profile->sport1 }}</div>
             <div>{{ $profile->sport2 }}</div>
             <div>{{ $profile->sport3 }}</div>
