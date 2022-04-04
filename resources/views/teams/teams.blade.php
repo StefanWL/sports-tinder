@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex justify-center">
-    <div class="w-8/12 bg-white p-6 rounded-lg">
-            Teams
-            <form action="{{ route('teams') }}" method="post">
-                @csrf
-                <button type="submit">New Team</button>
-            </form>
-        </div>
-
-        @if($teams->count())
-            @foreach($teams as $team)
-                @if($team->profile->photos->count())
-                    <img height="50px" src="data:image/jpeg;base64,{{ $team->profile->photos->first()->image }}"/>
-                @endif
-                <a href="{{ route('team', $team) }}">{{ $team->profile->name }}</a>
-            @endforeach
-        @endif
+    <div class="row justify-content-end">
+        <form class="col-1" action="{{ route('teams') }}" method="post">
+            @csrf
+            <button class="btn btn-danger fs-5 fw-bold" type="submit">+</button>
+        </form>
     </div>
+    @if($teams->count())
+        @foreach($teams as $team)
+        <a class="row text-decoration-none w-100" href="{{ route('team', $team) }}">
+        @if($team->profile->photos->count())
+            <div class="rounded-circle overflow-hidden col-3" style="height:50px; width:50px; background-size: cover; background-image: url('data:image/jpeg;base64,{{ $team->profile->photos->first()->image }}'"></div>
+        @endif
+            <div class="col-9">
+                <h5 class="text-dark text-decoration-none">{{ $team->profile->name }}</h5>
+            </div>
+        </a>
+        @endforeach
+    @endif
 @endsection

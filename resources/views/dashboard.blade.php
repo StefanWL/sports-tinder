@@ -1,35 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex justify-center">
-        <div class="w-8/12 bg-white p-6 rounded-lg">
-            Dashboard
+
+    @if($profile)
+        <h3>{{ $profile->profileable->name }}</h3>
+            @if($profile->photos->count())
+                @foreach($profile->photos as $photo)
+                <div>
+                    <img class="w-100" src="data:image/jpeg;base64,{{ $photo->image }}"/>
+                </div>
+                @endforeach
+            @else
+                <div>
+                    <img class="w-100" src="/img/placeholder-image.png"/>
+                </div>
+            @endif
+        <h5><span>{{ $profile->sport1 }} </span><span>{{ $profile->sport2 }} </span><span>{{ $profile->sport3 }} </span></h5>
+        <div>{{ $profile->bio }}</div>
+        <div class="row mt-5 justify-content-around">
+            <form class="col-2" action="{{ route('decision', ['profile' => $profile, 'choice' => 'pass']) }}" method="post">
+                @csrf
+                <button class="btn btn-danger rounded-pill fs-3 px-4 fw-bold" type="submit">x</button>
+            </form>
+            <form class="col-2" action="{{ route('decision', ['profile' => $profile, 'choice' => 'challenge']) }}" method="post">
+                @csrf
+                <button class="btn btn-warning text-white rounded-pill fs-3 px-4 fw-bold" type="submit">vs</button>
+            </form>
+            <form class="col-2" action="{{ route('decision', ['profile' => $profile, 'choice' => 'like']) }}" method="post">
+                @csrf
+                <button class="btn btn-success rounded-pill fs-3 px-4 fw-bold" type="submit">+</button>
+            </form>
         </div>
-        @if($profile)
-            <div>{{ $profile->profileable->name }}</div>
-            <div>{{ $profile->sport1 }}</div>
-            <div>{{ $profile->sport2 }}</div>
-            <div>{{ $profile->sport3 }}</div>
-            <div>{{ $profile->bio }}</div>
-            @foreach($profile->photos as $photo)
-                <img src="data:image/jpeg;base64,{{ $photo->image }}"/>
-            @endforeach
-            <div>
-                <form action="{{ route('decision', ['profile' => $profile, 'choice' => 'pass']) }}" method="post">
-                    @csrf
-                    <button type="submit">Pass</button>
-                </form>
-                <form action="{{ route('decision', ['profile' => $profile, 'choice' => 'challenge']) }}" method="post">
-                    @csrf
-                    <button type="submit">Challenge</button>
-                </form>
-                <form action="{{ route('decision', ['profile' => $profile, 'choice' => 'like']) }}" method="post">
-                    @csrf
-                    <button type="submit">Like</button>
-                </form>
-            </div>
-        @else
-            <div>Out of profiles</div>
-        @endif
-    </div>
+    @else
+        <h3>Out of profiles</h3>
+        <div>
+            <img class="w-100" src="/img/placeholder-image.png"/>
+        </div>
+    @endif
 @endsection

@@ -1,28 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex justify-center">
-        <div class="w-8/12 bg-white p-6 rounded-lg">
+        <div class="row text-decoration-none w-100 justify-content-between mb-3">
         @if($partner->photos->count())
-            <img height="50px" src="data:image/jpeg;base64,{{ $partner->photos->first()->image }}"/>
+            <div class="rounded-circle overflow-hidden col-2" style="height:50px; width:50px; background-size: cover; background-image: url('data:image/jpeg;base64,{{ $partner->photos->first()->image }}'"></div>
         @endif
-            {{ $partner->profileable->name }}
-            <form action="{{ route('teams', $partner->profileable) }}" method="post">
-                @csrf
-                <button type="submit">New Team</button>
+            <div class="col-9">
+                <h5 class="text-dark text-decoration-none">{{ $partner->profileable->name }}</h5>
+            </div>
+            <form class="col-1" action="{{ route('teams', $partner->profileable) }}" method="post">
+                    @csrf
+                    <button class="btn btn-danger fs-5 fw-bold" title="Form team with {{ $partner->profileable->name }}" type="submit">+</button>
             </form>
         </div>
         @foreach($conversation->messages as $message)
-            @if($message->user->id === auth()->user()->id)
-                <div class="user-message">{{ $message->content }}</div>
-            @else
-                <div>{{ $message->content }}</div>
-            @endif
+                @if($message->user->id === auth()->user()->id)
+                <div class="mt-1 d-flex justify-content-end">
+                    <span class="bg-danger text-white p-2 rounded text-end">{{ $message->content }}</span>
+                </div>
+                @else
+                <div class="mt-1 d-flex">
+                    <span class="bg-secondary text-white p-2 rounded">{{ $message->content }}</span>
+                </div>
+                @endif
         @endforeach
-    </div>
     <form action="{{ route('conversation', $conversation) }}" method="post">
         @csrf
-        <input name="content" id="content" placeholder="Say something..." ></input>
-        <button type="submit">Send</button>
+        <div class="row justify-content-around mt-4">
+            <input class="col-9 p-3 rounded border border-dark " name="content" id="content" placeholder="Say something..." ></input>
+            <button class="col-2 btn btn-danger fs-4 px-4 fw-bold" type="submit">></button>
+        </div>
     </form>
 @endsection
