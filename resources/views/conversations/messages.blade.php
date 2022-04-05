@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="row text-decoration-none w-100 justify-content-between mb-3">
+        <div class="row text-decoration-none w-100 justify-content-start mb-3">
         @if($partner->photos->count())
             <div class="rounded-circle overflow-hidden col-2" style="height:50px; width:50px; background-size: cover; background-image: url('data:image/jpeg;base64,{{ $partner->photos->first()->image }}'"></div>
         @endif
@@ -10,7 +10,7 @@
             </div>
             <form class="col-1" action="{{ route('teams', $partner->profileable) }}" method="post">
                     @csrf
-                    <button class="btn btn-danger fs-5 fw-bold" title="Form team with {{ $partner->profileable->name }}" type="submit">+</button>
+                    <button class="btn btn-danger" title="Form team with {{ $partner->profileable->name }}" type="submit">Team</button>
             </form>
         </div>
         @foreach($conversation->messages as $message)

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row justify-content-end">
-        <form class="col-1" action="{{ route('teams') }}" method="post">
+    <div class="row">
+        <form class="" action="{{ route('teams') }}" method="post">
             @csrf
-            <button class="btn btn-danger fs-5 fw-bold" type="submit">+</button>
+            <button class="btn btn-danger" type="submit">New Team</button>
         </form>
     </div>
     @if($teams->count())

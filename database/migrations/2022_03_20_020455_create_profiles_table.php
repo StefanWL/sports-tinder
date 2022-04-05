@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('profileable_id');
-            //$table->foreign('profileable_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('profileable_type')->nullable();
             $table->string('name')->nullable();
             $table->string('bio')->nullable();

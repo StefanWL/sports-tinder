@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <a class="btn btn-danger" href="{{ route('settings') }}">Search Settings</a>
     @if($profile)
         <h3>{{ $profile->profileable->name }}</h3>
             @if($profile->photos->count())

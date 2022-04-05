@@ -29,6 +29,7 @@ class RegisterController extends Controller
         ]);
 
         $user->profile()->create();
+        $user->settings()->create();
 
         auth()->attempt($request->only('email', 'password'));
 

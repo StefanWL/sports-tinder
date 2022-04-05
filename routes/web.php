@@ -6,6 +6,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -25,6 +26,9 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 
 Route::get('/profile', [UserProfileController::class, 'index'])->name('profile')->middleware('auth');
 Route::post('/profile', [UserProfileController::class, 'edit'])->middleware('auth');
+
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings')->middleware('auth');
+Route::post('/settings', [SettingsController::class, 'edit'])->middleware('auth');
 
 Route::post('/decision/{profile}/{choice}', [DecisionController::class, 'create'])->name('decision')->middleware('auth');
 
