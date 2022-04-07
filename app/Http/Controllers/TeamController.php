@@ -22,12 +22,19 @@ class TeamController extends Controller
     {
         $team = Team::create();
         $team->members()->attach(auth()->user()->id);
+
+        $team->profile()->create();
+        $team->profile->name = "New Team";
+
+        $conversation = $team->conversations()->create();
+        $conversation->participants()->attach(auth()->user()->id);
+
         if($user)
         {
             $team->members()->attach($user->id);
+            $conversation->participants()->attach($user->id);
         }
-        $team->profile()->create();
-        $team->profile->name = "New Team";
+
         return redirect()->route('team', $team->id);
     }
 
@@ -55,13 +62,15 @@ class TeamController extends Controller
         $profile->photos()->delete();
 
         $images = $request->file('images');
-        foreach ($images as $image)
+        if($images)
         {
-            $profile->photos()->create([
-                'image' => base64_encode(file_get_contents($image->getRealPath()))
-            ]);
+            foreach ($images as $image)
+            {
+                $profile->photos()->create([
+                    'image' => base64_encode(file_get_contents($image->getRealPath()))
+                ]);
+            }
         }
-
         return redirect('dashboard');
     }
 }

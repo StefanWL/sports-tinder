@@ -3,7 +3,7 @@
 @section('content')
     <a class="btn btn-danger" href="{{ route('settings') }}">Search Settings</a>
     @if($profile)
-        <h3>{{ $profile->profileable->name }}</h3>
+        <h3>{{ $profile->name }}</h3>
             @if($profile->photos->count())
                 @foreach($profile->photos as $photo)
                 <div>

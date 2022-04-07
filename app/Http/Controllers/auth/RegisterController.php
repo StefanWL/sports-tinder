@@ -31,6 +31,9 @@ class RegisterController extends Controller
         $user->profile()->create();
         $user->settings()->create();
 
+        $user->profile()->name = $user->name;
+
+
         auth()->attempt($request->only('email', 'password'));
 
         return redirect()->route('dashboard');

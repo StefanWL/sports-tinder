@@ -14,10 +14,18 @@ class ConversationController extends Controller
 
         foreach($conversations as $conversation)
         {
-            $partner = $conversation->participants->reject(function ($participant) use($user) {
-                return $participant->id === $user->id;
-            })->first()->profile;
-            $conversation->partner = $partner;
+            if($conversation->teams->count())
+            {
+                $profile = $conversation->teams->first()->profile;
+            }
+            else
+            {
+                $profile = $conversation->participants->reject(function ($participant) use($user) {
+                    return $participant->id === $user->id;
+                })->first()->profile;
+            }
+
+            $conversation->profile = $profile;
         }
 
         return view('conversations.conversations', [
@@ -27,13 +35,21 @@ class ConversationController extends Controller
     public function detail(Conversation $conversation)
     {
         $user = auth()->user();
-        $partner = $conversation->participants->reject(function ($participant) use($user) {
-            return $participant->id === $user->id;
-        })->first()->profile;
+
+        if($conversation->teams->count())
+        {
+            $profile = $conversation->teams->first()->profile;
+        }
+        else
+        {
+            $profile = $conversation->participants->reject(function ($participant) use($user) {
+                return $participant->id === $user->id;
+            })->first()->profile;
+        }
 
         return view('conversations.messages', [
             'conversation' => $conversation,
-            'partner' => $partner,
+            'profile' => $profile,
         ]);
     }
     public function create(Conversation $conversation, Request $request)

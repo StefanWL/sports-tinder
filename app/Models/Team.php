@@ -22,6 +22,11 @@ class Team extends Model
         return $this->morphOne(Profile::class, 'profileable');
     }
 
+    public function searchers()
+    {
+        return $this->morphMany(Settings::class, 'searchForable');
+    }
+
     public function decisions()
     {
         return $this->morphMany(Decision::class, 'decisionable');

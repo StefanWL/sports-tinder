@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('searchforable_id');
-            $table->string('searchforable_type')->nullable();
-            $table->string('users')->nullable();
-            $table->string('teams')->nullable();
+            $table->foreignId('user_id');
+            $table->unsignedBigInteger('search_forable_id')->nullable();
+            $table->string('search_forable_type')->nullable();
+            $table->boolean('search_users')->nullable();
+            $table->boolean('search_teams')->nullable();
             $table->string('sport')->nullable();
             $table->timestamps();
         });

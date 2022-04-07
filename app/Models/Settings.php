@@ -11,12 +11,14 @@ class Settings extends Model
 
     protected $fillable = [
         'sport',
+        'search_users',
+        'search_teams',
     ];
 
-    protected $casts = [
-        'search_users' => 'boolean',
-        'search_teams' => 'boolean',
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function searchForable()
     {

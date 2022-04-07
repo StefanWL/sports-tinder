@@ -2,15 +2,15 @@
 
 @section('content')
         <div class="row text-decoration-none w-100 justify-content-start mb-3">
-        @if($partner->photos->count())
-            <div class="rounded-circle overflow-hidden col-2" style="height:50px; width:50px; background-size: cover; background-image: url('data:image/jpeg;base64,{{ $partner->photos->first()->image }}'"></div>
+        @if($profile->photos->count())
+            <div class="rounded-circle overflow-hidden col-2" style="height:50px; width:50px; background-size: cover; background-image: url('data:image/jpeg;base64,{{ $profile->photos->first()->image }}'"></div>
         @endif
             <div class="col-9">
-                <h5 class="text-dark text-decoration-none">{{ $partner->profileable->name }}</h5>
+                <h5 class="text-dark text-decoration-none">{{ $profile->name }}</h5>
             </div>
-            <form class="col-1" action="{{ route('teams', $partner->profileable) }}" method="post">
+            <form class="col-1" action="{{ route('teams', $profile->profileable) }}" method="post">
                     @csrf
-                    <button class="btn btn-danger" title="Form team with {{ $partner->profileable->name }}" type="submit">Team</button>
+                    <button class="btn btn-danger" title="Form team with {{ $profile->name }}" type="submit">Team</button>
             </form>
         </div>
         @foreach($conversation->messages as $message)

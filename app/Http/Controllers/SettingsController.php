@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Team;
 
 class SettingsController extends Controller
 {
     public function index()
     {
         $settings = auth()->user()->settings;
+
         return view('user.settings',[
             'settings' => $settings,
         ]);
@@ -16,28 +18,24 @@ class SettingsController extends Controller
 
     public function edit(Request $request)
     {
-        $this->validate($request, [
-            'sport1' => 'nullable',
-            'sport2' => 'nullable',
-            'sport3' => 'nullable',
-            'bio' => 'nullable',
-            'images.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2047'
-        ]);
+        $settings = auth()->user()->settings;
 
-        $profile = auth()->user()->profile;
+        $settings->search_users = 0;
+        $settings->search_teams = 0;
 
-        $profile->fill($request->all());
-        $profile->save();
+        $settings->fill($request->all());
 
-        $profile->photos()->delete();
-
-        $images = $request->file('images');
-        foreach ($images as $image)
+        if($request->searchForable)
         {
-            $profile->photos()->create([
-                'image' => base64_encode(file_get_contents($image->getRealPath()))
-            ]);
+            $team = Team::find($request->searchForable);
+            $settings->searchForable()->associate($team);
         }
+        elseif($settings->searchForable)
+        {
+            $settings->searchForable()->dissociate();
+        }
+
+        $settings->save();
 
         return redirect('dashboard');
     }

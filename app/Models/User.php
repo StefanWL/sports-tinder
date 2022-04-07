@@ -28,6 +28,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class);
     }
 
+    public function settings()
+    {
+        return $this->hasOne(Settings::class);
+    }
+
     public function messages()
     {
         return $this->hasMany(Message::class);
@@ -36,6 +41,11 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->morphOne(Profile::class, 'profileable');
+    }
+
+    public function searchers()
+    {
+        return $this->morphMany(Settings::class, 'searchForable');
     }
 
     public function decisions()
