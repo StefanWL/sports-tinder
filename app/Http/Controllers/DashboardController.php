@@ -13,7 +13,18 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
+
+        if($user->profile->name == null)
+        {
+            return redirect('user/edit');
+        }
+
         $settings = $user->settings;
+
+        if($settings->sport == null)
+        {
+            return redirect('settings');
+        }
         if($settings->searchForable)
         {
             $decider = $settings->searchForable;
@@ -52,14 +63,7 @@ class DashboardController extends Controller
                     ->where('profiles.profileable_type', $nType)
                     ->whereColumn('profiles.profileable_id', 'team_user.'.$nTypeRaw.'_id');
             }
-        )->where(
-            function ($query) use($settings)
-            {
-                $query->where('profiles.sport1', $settings->sport)
-                    ->orWhere('profiles.sport2', $settings->sport)
-                    ->orWhere('profiles.sport3', $settings->sport);
-            }
-        )->where(
+        )->where('profiles.'.$settings->sport, "1")->where(
             function ($query) use($settings)
             {
                 if(!$settings->search_users)

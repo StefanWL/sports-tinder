@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Conversation;
+use App\Models\User;
 
 class ConversationController extends Controller
 {
@@ -61,5 +62,23 @@ class ConversationController extends Controller
         $message->save();
 
         return redirect()->route('conversation', $conversation);
+    }
+    public function refresh(Conversation $conversation, User $user)
+    {
+        if($conversation->teams->count())
+        {
+            $profile = $conversation->teams->first()->profile;
+        }
+        else
+        {
+            $profile = $conversation->participants->reject(function ($participant) use($user) {
+                return $participant->id === $user->id;
+            })->first()->profile;
+        }
+
+        return view('conversations.refresh', [
+            'conversation' => $conversation,
+            'profile' => $profile,
+        ]);
     }
 }

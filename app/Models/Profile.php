@@ -12,9 +12,20 @@ class Profile extends Model
     protected $fillable = [
         'name',
         'bio',
-        'sport1',
-        'sport2',
-        'sport3',
+        'sport',
+        'baseball',
+        'basketball',
+        'football',
+        'hockey',
+        'ultimate',
+        'soccer',
+        'bowling',
+        'sparring',
+        'cycling',
+        'running',
+        'golf',
+        'tennis',
+        'skillLevel',
     ];
 
     public function profileable()

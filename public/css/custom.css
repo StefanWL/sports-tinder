@@ -1,0 +1,126 @@
+.colors{
+    color: rgb(105,42,25);
+    color: rgb(120,113,33);
+    color: rgb(40,79,41);
+    color: rgb(223,76,49);
+    color: rgb(66,83,153);
+    color: rgb(198,203,225);
+    color: rgb(206,156,63);
+    color: rgb(236,225,190);
+    color: rgb(241,240,235);
+}
+
+body {
+    background-color: rgb(241,240,235);
+    font-family: 'Lato', sans-serif;
+}
+
+.heading-text {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.purple {
+    background-color: rgb(66,83,153);
+    color: white;
+    transition: background-color .15s, color .15s;
+}
+.purple:hover {
+    background-color: rgb(198,203,225);
+}
+
+.icon {
+    color: black;
+    transition: color .15s;
+}
+.icon:hover {
+    color: rgb(66,83,153);
+}
+.icon-red {
+    color: rgb(223,76,49);
+    transition: color .15s;
+}
+.icon-red:hover {
+    color: black;
+}
+.icon-yellow {
+    color: rgb(206,156,63);
+    transition: color .15s;
+}
+.icon-yellow:hover {
+    color: black;
+}
+.icon-green {
+    color: rgb(40,79,41);
+    transition: color .15s;
+}
+.icon-green:hover {
+    color: black;
+}
+.icon-button {
+    border: none;
+    background-color: transparent;
+}
+
+.checkbutton {
+    background-color: black;
+    color: white;
+    transition: background-color .0s, color .0s;
+}
+.checkbutton:hover {
+    color: white;
+}
+.checkbutton-container input:checked ~ .checkbutton {
+    background-color: rgb(66,83,153);
+}
+
+.conversation {
+    color: black;
+    transition: background-color .15s, color .15s;
+}
+.conversation:hover {
+    color: black;
+    background-color: rgb(236,225,190);
+}
+
+.message {
+    color: rgb(66,83,153);
+    background-color: rgb(198,203,225);
+}
+.message-bar {
+    width: 85%;
+}
+
+.image {
+    border-radius: 1.5em;
+}
+.placeholder-image {
+    color: rgb(236,225,190);
+}
+
+.file-upload {
+    display: none;
+}
+.file-upload-label {
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: solid 1px black;
+    border-radius: 1.5em;
+    color: black;
+    text-align: center;
+    width: 100%;
+    padding-top: 30%;
+    padding-bottom: 30%;
+    cursor: pointer;
+    transition: color 0.15s, border 0.15s;
+}
+.file-upload-label:hover {
+    border: solid 1px rgb(66,83,153);
+    color: rgb(66,83,153);
+}
+.file-upload-label:active {
+    outline: solid 1px rgb(39,93,197);
+    border: solid 1px rgb(39,93,197);
+    color: rgb(66,83,153);
+}

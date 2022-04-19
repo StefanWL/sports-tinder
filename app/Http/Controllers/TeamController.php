@@ -23,19 +23,19 @@ class TeamController extends Controller
         $team = Team::create();
         $team->members()->attach(auth()->user()->id);
 
-        $team->profile()->create();
-        $team->profile->name = "New Team";
+        $profile = $team->profile()->create();
 
         $conversation = $team->conversations()->create();
         $conversation->participants()->attach(auth()->user()->id);
 
+        $profile->name = "Untitled Team";
         if($user)
         {
             $team->members()->attach($user->id);
             $conversation->participants()->attach($user->id);
         }
 
-        return redirect()->route('team', $team->id);
+        return redirect()->route('team', $team);
     }
 
     public function detail(Team $team)
@@ -48,12 +48,6 @@ class TeamController extends Controller
 
     public function edit(Request $request, Team $team)
     {
-        $this->validate($request, [
-            'sport1' => 'nullable',
-            'bio' => 'nullable',
-            'images.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2047'
-        ]);
-
         $profile = $team->profile;
 
         $profile->fill($request->all());
@@ -71,6 +65,6 @@ class TeamController extends Controller
                 ]);
             }
         }
-        return redirect('dashboard');
+        return redirect()->route('profile', $profile);
     }
 }

@@ -19,9 +19,20 @@ return new class extends Migration
             $table->string('profileable_type')->nullable();
             $table->string('name')->nullable();
             $table->string('bio')->nullable();
-            $table->string('sport1')->nullable();
-            $table->string('sport2')->nullable();
-            $table->string('sport3')->nullable();
+            $table->string('sport')->nullable();
+            $table->string('skillLevel')->nullable();
+            $table->boolean('baseball')->nullable();
+            $table->boolean('basketball')->nullable();
+            $table->boolean('football')->nullable();
+            $table->boolean('hockey')->nullable();
+            $table->boolean('ultimate')->nullable();
+            $table->boolean('soccer')->nullable();
+            $table->boolean('bowling')->nullable();
+            $table->boolean('sparring')->nullable();
+            $table->boolean('cycling')->nullable();
+            $table->boolean('running')->nullable();
+            $table->boolean('golf')->nullable();
+            $table->boolean('tennis')->nullable();
             $table->timestamps();
         });
     }

@@ -24,8 +24,11 @@ Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
-Route::get('/profile', [UserProfileController::class, 'index'])->name('profile')->middleware('auth');
-Route::post('/profile', [UserProfileController::class, 'edit'])->middleware('auth');
+Route::get('/profile/{profile}', [UserProfileController::class, 'profile'])->name('profile')->middleware('auth');
+
+Route::get('/user', [UserProfileController::class, 'index'])->name('user')->middleware('auth');
+Route::get('/user/edit', [UserProfileController::class, 'detail'])->name('user.edit')->middleware('auth');
+Route::post('/user/edit', [UserProfileController::class, 'edit'])->middleware('auth');
 
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings')->middleware('auth');
 Route::post('/settings', [SettingsController::class, 'edit'])->middleware('auth');
@@ -36,6 +39,8 @@ Route::get('/conversations', [ConversationController::class, 'index'])->name('co
 
 Route::get('/conversations/{conversation}', [ConversationController::class, 'detail'])->name('conversation')->middleware('auth');
 Route::post('/conversations/{conversation}', [ConversationController::class, 'create'])->middleware('auth');
+Route::get('/conversations/refresh/{conversation}/{user}', [ConversationController::class, 'refresh']);
+
 
 Route::get('/teams', [TeamController::class, 'index'])->name('teams')->middleware('auth');
 Route::post('/teams/{user?}', [TeamController::class, 'create'])->middleware('auth');
