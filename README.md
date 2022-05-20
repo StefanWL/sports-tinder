@@ -1,4 +1,4 @@
-#SPRT
+# SPRT
 
 The hope of this app was to help people meet friends to play sports with.
 That could be on team together or against each other.
@@ -22,6 +22,6 @@ Cindy Lin - Wireframes, User Testing, Product Design Discussions
 <br />
 Pallav Dubey - User Testing, Product Design Discussions
 <br />
-Karmugil  - User Testing, Product Design Discussions
+Karmugil Kavitha - User Testing, Product Design Discussions
 <br />
 Stefan Whittaker-Lee - Dev Ops - Hosting, All Code, Database, Visual Design, User Testing, Product Design Discussions
