@@ -1,5 +1,7 @@
 # SPRT
 
+Live Site: http://sports-team-app.herokuapp.com
+
 The hope of this app was to help people meet friends to play sports with.
 That could be on team together or against each other.
 We try to implement tinder's model but adapting it for meeting people for sports,
